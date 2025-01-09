@@ -64,25 +64,27 @@ def bagel_game():
           I have thought up a number.
           You have {} guesses to get it.
           '''.format(numberOfDigits, maxNumberOfGuesses))
-    
-    
+
+    secretNumber = getSecretNumber()
     guessNumber = 1
     while True: 
-        turn = input("Guess #{}: \n".format(guessNumber))
-        if guessNumber <= maxNumberOfGuesses:
-            if turn == getSecretNumber.secretNumber:
+        guess = ''
+        guess = input("Guess #{}: \n".format(guessNumber))
+        if guessNumber < maxNumberOfGuesses:
+            if guess == secretNumber:
                 print("You got it!")
                 break
             else: 
-                getClues()
-            guessNumber += 1 
+                clues = getClues(guess, secretNumber)
+                print(clues)
+                guessNumber += 1 
             
 
-        elif guessNumber > maxNumberOfGuesses:
-            print("You ran out of guesses. The answer was {}".format(getSecretNumber.secretNumber))
+        elif guessNumber >= maxNumberOfGuesses:
+            print("You ran out of guesses. The answer was {}".format(secretNumber))
             break
 
-def getClues():
+def getClues(guess, secretNumber):
     """
             Pico         One digit is correct but in the wrong position.
             Fermi        One digit is correct and in the right position.
@@ -90,21 +92,22 @@ def getClues():
           For example, if the secret number was 248 and your guess was 843, the clues would be Fermi Pico.
     """
     clue = []
-    list(bagel_game.turn)
-    list(getSecretNumber.secretNumber)
-    for i in range(len(bagel_game.turn)):
-        if bagel_game.turn[i] == getSecretNumber.secretNumber[i]:
+    for i in range(numberOfDigits):
+        if guess[i] == secretNumber[i]:
             clue.append("Fermi")
-        elif bagel_game.turn[i] in getSecretNumber.secretNumber:
+        elif guess[i] in secretNumber:
             clue.append("Pico")
         else:
             clue.append("Bagels")
     clue.sort()
+    return ' '.join(clue)
 
-def getSecretNumber(self):
+def getSecretNumber():
+    secretNumber = ''
     randomNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     random.shuffle(randomNumbers)
-    self.secretNumber = int(''.join(randomNumbers[0:numberOfDigits]))
+    secretNumber = ''.join(randomNumbers[0:numberOfDigits])
+    return secretNumber
 
 if __name__ == '__main__':
     bagel_game()

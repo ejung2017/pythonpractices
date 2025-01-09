@@ -48,7 +48,7 @@ Bagels, a deductive logic game.
 """
 
 maxNumberOfGuesses = 3
-numberOfDigits = 1
+numberOfDigits = 2
 
 def bagel_game(): 
     print('''
@@ -66,11 +66,12 @@ def bagel_game():
           '''.format(numberOfDigits, maxNumberOfGuesses))
 
     secretNumber = getSecretNumber()
+    print(secretNumber)
     guessNumber = 1
     while True: 
         guess = ''
         guess = input("Guess #{}: \n".format(guessNumber))
-        if guessNumber < maxNumberOfGuesses:
+        if guessNumber <= maxNumberOfGuesses:
             if guess == secretNumber:
                 print("You got it!")
                 break
@@ -80,7 +81,7 @@ def bagel_game():
                 guessNumber += 1 
             
 
-        elif guessNumber >= maxNumberOfGuesses:
+        elif guessNumber > maxNumberOfGuesses:
             print("You ran out of guesses. The answer was {}".format(secretNumber))
             break
 
@@ -92,15 +93,13 @@ def getClues(guess, secretNumber):
           For example, if the secret number was 248 and your guess was 843, the clues would be Fermi Pico.
     """
     clue = []
-    for i in range(numberOfDigits):
+    for i in range(0,numberOfDigits):
         if guess[i] == secretNumber[i]:
             clue.append("Fermi")
         elif guess[i] in secretNumber:
             clue.append("Pico")
-        else:
-            clue.append("Bagels")
     clue.sort()
-    return ' '.join(clue)
+    return ' '.join(clue) if len(clue) != 0 else 'Bagels'
 
 def getSecretNumber():
     secretNumber = ''

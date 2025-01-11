@@ -15,3 +15,6 @@ Day 3 Part 2:
 Bitmap 
 seems like sys module is now embedded by default? .splitlines() was used without importing sys
 .splitlines() splits an entire essay or a block of paragraph by lines and puts it in a list 
+
+Day 4: 
+Blackjack card game 

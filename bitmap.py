@@ -24,15 +24,12 @@ bitmap = """
 # .splitlines() is a function within sys module that separates the string per line and returns those line of strings in a list 
 
 message = ''
-# message = input("Enter the message you want to display: \n")
-
-
-# for line in bitmap.splitlines(): 
+message = input("Enter the message you want to display: \n")
     
-hello = "Hi my name is Eunah"
-yo = "yo"
-for i, char in enumerate(hello): 
-    if char == " ": 
-        print(" ", end="")
-    else: 
-        print(yo[i%len(yo)], end="")
+for line in bitmap.splitlines(): 
+    for index, char in enumerate(line): 
+        if char == " ": 
+            print(" ", end="")
+        else: 
+            print(message[index % len(message)], end="") 
+    print()

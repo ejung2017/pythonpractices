@@ -22,16 +22,22 @@ The dealer stops hitting at 17.'''
 def main(): 
     money = 5000
     print("Money: {}".format(money))
-    betAmount = 0
-    print("How much do you bet? (1-5000, or QUIT)")
-    betAmount = input("> ")
+    remaining = getBet(money)
+    print(remaining)
 
-    money -= betAmount 
-    
-
-def getBet(betAmount): 
+def getBet(money): 
     """Ask the player how much they want to bet for this round."""
-    betAmount 
+    print("How much do you bet? (1-5000, or QUIT)")
+    betAmount = int(input("> "))
+    while True: 
+        if betAmount > money: 
+            print("You don't have that much monies!")
+        else: 
+            money -= betAmount
+        break
+    return money
+
+
     pass
 
 def getDeck(): 

@@ -4,8 +4,17 @@
 # 다음은 addone 함수를 정의한 다음, map함수를 이용하여 addon함수를 리스트 각 element에 적용하는 예를 보여준다.
 # 이 map 함수 사용법을 이용하여 리스트 x의 각 원소별로 10으로 나눈 나머지를 계산하여 리스트로 저장하도록 하여라 (반드시 map 이용)
 def addone(n):
-	return n+1
+	return n%10 
 
+x = [10, 20, 30, 40, 51]
+
+#1
+map1 = map(addone, x)
+print(list(map1))
+
+#2 
+map2 = list(map(lambda x: x%10, [10,20,30,40,51]))
+print(map2)
 
 ## 문제2)
 # 1에서 100까지의 난수 10개를 얻어서 정렬하시오. 그리고 3의 배수만을 항목으로 구성된 리스트를 만들어 다음과 같이 출력하는 프로그램을 작성하시오
@@ -18,6 +27,26 @@ Two numbers:16 18
 16 18
 [16.0, 16.5, 17.0, 17.5, 18.0]
 """
+# Assume m > n 
+n = float(input("n: "))
+m = float(input("m: "))
+#for loop
+count = int((m-n)*2)
+lst = [n]
+for i in range(count): 
+	n += 0.5 
+	lst.append(n)
+print(lst)
+
+n = float(input("n: "))
+m = float(input("m: "))
+#while loop
+lst2 = [n]
+while n<m:
+	n += 0.5 
+	lst2.append(n) 
+print(lst2)
+
 
 ## 문제4)
 # 다음과 같이 중첩된 리스트가 있을때, 다음과 같이 출력하는 프로그램을 작성하세요. m에 주어진 원소가 무엇인지, 원소개수가 몇개인지 모른다고 가정하여 while 또는 for loop을 사용하여 해결해야함
@@ -31,11 +60,21 @@ m = [[1,2],[3,4],[5,6],[7,8]]
 1 3 5 7
 2 4 6 8
 """
+for list_element in m: 
+	print(' '.join(map(str,list_element)))
 
+for index in range(len(m[0])): 
+	print(' '.join([str(i[index]) for i in m]))
+	
 ## 문제5)
 # 다음 리스트 X는 중복된 원소가 있다. set 연산을 사용하지 않고, loop를 이용, X의 중복을 제거하여 newlist에 저장하는 프로그램을 작성하시오.
 X = ['A','B','C','D','B','D','E']
 new_list = []
+
+for letter in X: 
+	if letter not in new_list: 
+		new_list.append(letter)
+print(new_list)
 
 ## 문제 6)
 # 다음 3개의 리스트 X,Y,Z가 주어졌을때, X에는 속하지만, Y에는 속하지 않으면서, Z에 속하는 원소를 모두모아서 newlist에 저장하려고 한다. 
@@ -55,6 +94,20 @@ score = {'Lee': [90,85],'Kim':[45,96],'Park':[53,89]}
 child = {'Lee':1,'Kim':1,'Park':3}
 hours = {'Lee':1000,'Kim':200,'Park':300}
 area = {'Lee':'loc A','Kim':'loc B','Park':'loc A'}
+
+#1 
+score_sum = [(k, sum(score[k])) for k in score.keys()]
+score_sum = sorted(score_sum, key=lambda x:x[1], reverse=True) #[('Lee', 175), ('Park', 142), ('Kim', 141)]
+highest_scorer = score_sum[0][0] #Lee 
+print(highest_scorer, child[highest_scorer], hours[highest_scorer]) # Lee 1 1000
+
+#2 
+for name in child.keys(): 
+	if child[name] == 1: 
+		print(name, area[name], score[name], hours[name])
+
+# Lee loc A [90, 85] 1000
+# Kim loc B [45, 96] 200
 
 ## 문제 8)
 # 두사람 X, Y는 다트게임을 하고 있다. 20회 반복해서 얻는 점수는 실제 측정하는 대신, randint()함수를 이용하여 주어진다고 가정한다. 

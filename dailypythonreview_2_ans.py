@@ -154,3 +154,21 @@ Yes. 6 is in the pool
 0 7 8 6
 All digits are found. Game is over.
 """
+from random import randint 
+print("Guess 4 digits")
+hidden = ["-" for i in range(4)]
+randomNums = [randint(0,9) for i in range(4)]
+print(' '.join(map(str,randomNums)))
+while True: 
+	print(' '.join(map(str, hidden)))
+	guess = int(input())
+	if guess in randomNums: 
+		print("Yes. {} is in the pool".format(guess))
+		hidden.pop()
+		hidden.insert(0,guess)
+	else: 
+		print("Cannot find it")
+	if "-" not in hidden: 
+		print(' '.join(map(str, hidden)))
+		print("All digits are found. Game is over.")
+		break

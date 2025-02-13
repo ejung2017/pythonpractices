@@ -3,6 +3,12 @@ import seaborn as sns
 
 df = sns.load_dataset('titanic')
 
+df1 = df[['sex', 'age']]
+df2 = df[['fare', 'pclass']]
+
+print(df1)
+print(df2)
+
 """
 [] vs ()
 
@@ -16,6 +22,13 @@ df.loc[]
 order matters 
 CORRECT: 
 df.groupby('sex')['fare'].mean()
+
+
+df['fare'].groupby('sex').mean() # KeyError: 'sex'
+df[['fare']] -> dataframe
+df['fare'] -> series
+
+df[['fare','sex']].groupby('sex').mean() 
 
 ERRORS: 
 df['fare'].groupby('sex').mean() # KeyError: 'sex' 
